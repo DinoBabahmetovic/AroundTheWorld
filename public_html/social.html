@@ -1,0 +1,132 @@
+<link rel="stylesheet" href="style.css">
+<section id="nav-test">
+    <div class="nav-container"><div id="size"> <div id="image"><img src="flight.png" style="width:50px;height:30px;"></div><div id="text">Around the world</div></div></div>
+  <div id="nav-container">
+      
+    <ul>
+ 
+      <li class="nav-li"><a class="nav-li" href="index.html">Home</a></li>
+      <li class="nav-li"><a class="nav-li" href="video.html">Video</a></li>
+      <li class="nav-li active-nav"><a class="nav-li active-nav" >Social</a></li>
+
+    </ul>
+    <div id="line"></div>
+  </div>
+</section>
+
+<div class="sidebar right" id="sidebar">
+    <div class="top"> Top comments: </div>
+    
+    <table id="customers">
+  <tr>
+    <th>User</th>
+    <th>Comment</th>
+<!--    <th>Country</th>-->
+  </tr>
+  <tr>
+    <td>Alfreds Futterkiste
+        <div class="circle" style="background-image: 
+       url('http://www.stevekellylab.com/wp-content/uploads/2016/06/mpd-circle.jpg')">
+        </div>
+        <br>
+        <span>Rating: 84</span>
+    </td>
+    <td>Go anywhere south of Madrid in summer and you'll find that the place is an absolute furnace. 
+        Temperatures in cities such as Seville and Cordoba regularly nudge 40 degrees during July and August,
+        making it pretty uncomfortable for travellers. It makes you appreciate why siestas are so popular.
+        <br>
+        <div class="rating">
+        <span>&#9734</span><span>&#9734</span><span>&#9734</span><span>&#9734</span><span>&#9734</span>
+        </div>
+    </td>
+
+<!--    <td>Germany</td>-->
+  </tr>
+  <tr>
+    <td>Christina Berglund
+        <div class="circle" style="background-image: 
+       url('http://becomingthebboss.com/wp-content/uploads/2014/03/circle-brigid-professional.jpg')">
+        </div>
+        <br>
+        <span>Rating: 54</span>
+    </td>
+    <td>In the Valencia region, they claim you can eat a different rice dish every day of the year, 
+        but let’s stick with the most traditional version for now. Ingredients for paella Valenciana 
+        include chicken or rabbit, saffron, runner beans and butter beans. But the all-important 
+        element is the rice, ideally the bomba or calasaparra varieties grown on Spain’s east coast, 
+        which are particularly good for absorbing all the flavours.
+        <br>
+        <div class="rating">
+        <span>&#9734</span><span>&#9734</span><span>&#9734</span><span>&#9734</span><span>&#9734</span>
+    </td>
+<br>
+   
+</table>
+
+ <div class='button'>Leave a comment!</div>
+</div>
+
+
+
+  <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+<script src="jquery.sidebar.min.js"></script>
+
+    <script src="index.js"></script>
+<script src="map.js" type="text/javascript"></script>
+<link rel="stylesheet" href="ammap/ammap.css" type="text/css" media="all" />
+
+<script src="coordinates.js" type="text/javascript"></script>
+<script src="theme.js" type="text/javascript"></script>
+<div id="mapdiv" style="width: 100%; height: 85%;"></div>
+<footer id="footer">Copyright</footer>
+<!--<div style="width: 1000px; font-size: 70%; padding: 5px 0; text-align: center; background-color: #535364; margin-top: 1px; color: #B4B4B7;"><a href="https://www.amcharts.com/visited_countries/" style="color: #B4B4B7;">Create your own visited countries map</a> or check out the <a href="https://www.amcharts.com/" style="color: #B4B4B7;">JavaScript Charts</a>.</div>
+-->
+
+<script type="text/javascript">
+
+var map = AmCharts.makeChart("mapdiv",{
+type: "map",
+theme: "dark",
+projection: "mercator",
+panEventsEnabled : true,
+backgroundColor : "#535364",
+backgroundAlpha : 1,
+zoomControl: {
+zoomControlEnabled : true
+},
+dataProvider : {
+map : "worldHigh",
+getAreasFromMap : true,
+areas :
+[]
+},
+areasSettings : {
+autoZoom : true,
+color : "#B4B4B7",
+colorSolid : "#84ADE9",
+selectedColor : "#84ADE9",
+outlineColor : "#666666",
+rollOverColor : "#9EC2F7",
+rollOverOutlineColor : "#000000"
+}
+});
+//map.addListener("pointer", function (event) {
+//    if ($('#wiki').css('opacity') == 0) $('#wiki').css('opacity', 1);
+//   else $('#wiki').css('opacity', 0);
+//},
+var sidebar2 = $(".sidebar.right").sidebar();
+map.addListener("clickMapObject", function (event) {
+ if (event.mapObject.id != undefined && event.mapObject.id == "ES") {
+
+    sidebar2.css('visibility', 'visible');
+    sidebar2.trigger("sidebar:toggle");
+ }
+});
+ 
+$(document).ready(function(){
+ sidebar2.close=true;
+    
+});
+
+</script>
+

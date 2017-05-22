@@ -1,0 +1,116 @@
+<link rel="stylesheet" href="style.css">
+<section id="nav-test">
+    <div class="nav-container"><div id="size"> <div id="image"><img src="flight.png" style="width:50px;height:30px;"></div><div id="text">Around the world</div></div></div>
+  <div id="nav-container">
+      
+    <ul>
+ 
+      <li class="nav-li active-nav"><a>Home</a></li>
+      <li class="nav-li"><a href="video.html">Video</a></li>
+      <li class="nav-li"><a href="social.html">Social</a></li>
+
+    </ul>
+    <div id="line"></div>
+  </div>
+</section>
+
+<div id="wiki">
+
+  
+</div>
+
+
+
+<script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+
+<script src="index.js"></script>
+<script src="map.js" type="text/javascript"></script>
+<link rel="stylesheet" href="ammap/ammap.css" type="text/css" media="all" />
+
+<script src="coordinates.js" type="text/javascript"></script>
+<script src="theme.js" type="text/javascript"></script>
+<div id="mapdiv" style="width: 100%; height: 85%;"></div>
+<footer id="footer">Copyright</footer>
+
+
+<script type="text/javascript">
+var map = AmCharts.makeChart("mapdiv",{
+type: "map",
+theme: "dark",
+projection: "mercator",
+panEventsEnabled : true,
+backgroundColor : "#535364",
+backgroundAlpha : 1,
+zoomControl: {
+zoomControlEnabled : true
+},
+dataProvider : {
+map : "worldHigh",
+getAreasFromMap : true,
+areas :
+[]
+},
+areasSettings : {
+autoZoom : true,
+color : "#B4B4B7",
+colorSolid : "#84ADE9",
+selectedColor : "#84ADE9",
+outlineColor : "#666666",
+rollOverColor : "#9EC2F7",
+rollOverOutlineColor : "#000000"
+}
+});
+
+map.addListener("clickMapObject", function (event) {
+ if (event.mapObject.id !== undefined && event.mapObject.id === "ES") {
+    
+   $.ajax({
+        type: "GET",
+        url: "http://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=0&page=Spain&callback=?",
+        contentType: "application/json; charset=utf-8",
+        async: true,
+        dataType: "json",
+        success: function (data, textStatus, jqXHR) {
+             var markup = data.parse.text["*"];
+             
+            var blurb = $('<div></div>').html(markup);
+            blurb.find('a').each(function() { $(this).replaceWith($(this).html()); });
+             
+            blurb.find('sup').remove();
+            blurb.find('center').remove();
+
+            blurb.find('.mw-ext-cite-error').remove();
+            $('#wiki').html($(blurb).find('table'));
+
+            var wikiDiv = document.getElementById("wiki");
+            wikiDiv.style.visibility = "visible";
+            if ($('#wiki').css('opacity') == 0) { 
+                $('#wiki').css('opacity', 1);}
+            else $('#wiki').css('opacity', 0);   
+        },
+        error: function (errorMessage) {
+        }
+    });
+ }
+});
+
+$(document).ready(function() {
+    
+    wikiDiv.style.visibility = "hidden";
+    $('#wiki').css('opacity') == 0
+//    if ($('#wiki').css('opacity') == 0) $('#wiki').css('opacity', 1);
+//    else $('#wiki').css('opacity', 0);
+});
+var wikiDiv = document.getElementById("wiki");
+var myFunc = function(){
+
+var obj = map.getObjectById("wiki");
+var linkVideo = map.getObjectById("video");
+var linkHome = map.getObjectById("index");
+linkVideo.ClassName="nav-li active-nav";
+linkHome.ClassName="nav-li";
+};
+
+wikiDiv.addEventListener('timeupdate',myFunc,false);
+</script>
+

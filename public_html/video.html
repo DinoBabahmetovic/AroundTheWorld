@@ -1,0 +1,470 @@
+<link rel="stylesheet" href="style.css">
+<section id="nav-test">
+    <div class="nav-container"><div id="size"> <div id="image"><img src="flight.png" style="width:50px;height:30px;"></div><div id="text">Around the world</div></div></div>
+  <div id="nav-container">
+      
+    <ul>
+ 
+      <li class="nav-li" id="index"><a href="index.html">Home</a></li>
+      <li class="nav-li active-nav" id="video"><a>Video</a></li>
+      <li class="nav-li"><a href="social.html">Social</a></li>
+
+    </ul>
+    <div id="line"></div>
+  </div>
+</section>
+
+<video width="400" id="video1" controls>
+  <source id="sourceVid" src="" type="video/mp4">
+  Click on the country to see the video :)
+</video>
+
+<!--</div>-->
+
+
+  <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+  <script src="path/to/jQuery-sidebar.min.js"></script>
+
+<script src="index.js"></script>
+<script src="map.js" type="text/javascript"></script>
+<link rel="stylesheet" href="ammap/ammap.css" type="text/css" media="all" />
+
+<script src="coordinates.js" type="text/javascript"></script>
+<script src="theme.js" type="text/javascript"></script>
+<div id="mapdiv" style="width: 100%; height: 85%;"></div>
+<footer id="footer">Copyright</footer>
+<!--<div style="width: 1000px; font-size: 70%; padding: 5px 0; text-align: center; background-color: #535364; margin-top: 1px; color: #B4B4B7;"><a href="https://www.amcharts.com/visited_countries/" style="color: #B4B4B7;">Create your own visited countries map</a> or check out the <a href="https://www.amcharts.com/" style="color: #B4B4B7;">JavaScript Charts</a>.</div>
+-->
+
+<script type="text/javascript">
+var icon= "M8,0C4.687,0,2,2.687,2,6c0,3.854,4.321,8.663,5,9.398C7.281,15.703,7.516,16,8,16s0.719-0.297,1-0.602  C9.679,14.663,14,9.854,14,6C14,2.687,11.313,0,8,0z M8,10c-2.209,0-4-1.791-4-4s1.791-4,4-4s4,1.791,4,4S10.209,10,8,10z M8,4  C6.896,4,6,4.896,6,6s0.896,2,2,2s2-0.896,2-2S9.104,4,8,4z";
+var flamenco = "M29.192,26.822c-0.075,0.389-0.478,0.451-0.533,0.847c-0.056,0.395-0.212,0.743-0.558,1.047   c-0.346,0.305-0.839,0.555-1.179,0.928s-0.494,0.74-0.828,1.203c-0.333,0.464-1.24,1.03-1.729,1.364s-1.003,0.816-1.354,0.918   c-0.351,0.101-0.701-0.142-0.915,0.038c-0.213,0.178-0.514,0.664-0.965,0.664s-2.332-0.326-3.233-0.251   c-0.903,0.074-2.395,0.188-4.024,0.251c-1.629,0.062-1.944-0.236-3.021-0.265c-1.077-0.025-3.45,0.101-3.45,0.101   s-0.597-0.768-1.012-0.722c-0.415,0.046-0.239,0.586-0.49,0.583s-2.181-0.022-2.181-0.022s-0.247-0.688,0.616-0.789   c0.863-0.102,1.13-0.364,1.13-0.364s-0.505-0.138-0.33-0.251c0.176-0.112,3.021-3.624,3.673-4.877   c0.652-1.254,0.254-2.13,1.255-4.475c1.001-2.347,3.107-5.58,3.345-6.583c0.126-0.531,0.167-1.626,0.026-2.884   c-0.124-1.115-0.615-1.881-0.239-2.633c0.392-0.784,1.729-1.605,1.905-2.307c0.176-0.702-0.363-4.162-0.438-4.752   c-0.075-0.589,0.075-1.304,0.075-1.304s-0.151-0.15-0.313-0.163c-0.163-0.012-0.238-0.351,0.088-0.351c0.326,0,0.702,0,0.702,0   l0.176-0.339l-0.79-0.438c0,0,0.05-0.301,0.2-0.301s0.376,0,0.376,0s0.191-0.181,0.289-0.138c0.098,0.042,0.316,0.138,0.316,0.138   s0.123-0.188,0.048-0.351c-0.075-0.164,0.077-0.485,0.188-0.276c0.111,0.208,0.595,0.939,0.602,1.128   c0.007,0.189,0.05,0.49,0.025,0.69c-0.025,0.2-0.677,0.965-0.689,1.266c-0.012,0.301,0.313,1.479,0.389,1.68   c0.076,0.201,0.338,0.389,0.451,0.226c0.113-0.162,0.414-1.065,1.805-0.99c1.392,0.075,1.417,0.991,1.504,1.204   c0.088,0.213-0.079,0.839-0.064,1.14c0.015,0.302-0.186,0.452-0.249,0.603c-0.062,0.151,0.032,0.416-0.006,0.616   s-0.542,0.621-0.555,0.909s0.259,0.492,0.585,0.743c0.326,0.251,0.715,0.314,1.166,0.552c0.451,0.238,0.799,0.721,1.356,1.07   c0.559,0.349,0.687,0.359,1.175,0.735c0.489,0.376,0.841,0.715,0.966,0.952c0.112,0.214,0.256,2.762,0.222,2.893   s-0.165,0.651-0.259,0.743c-0.096,0.093-1.479,1.441-1.479,1.441s-0.343,0.138-0.338-0.05c0.005-0.188,0.028-1.102,0.028-1.102   s-0.53-0.14-0.718-0.152c-0.188-0.012-0.375-0.274-0.113-0.264c0.263,0.012,0.475,0.029,0.72,0.009s0.508-0.247,0.508-0.247   s-0.376-0.038-0.226-0.188c0.15-0.15,0.665-0.074,0.765-0.2c0.102-0.126-0.049-1.995-0.389-2.219s-1.266-0.853-1.768-1.053   c-0.502-0.201-0.79-0.64-1.905-0.401c-1.116,0.237-2.182,1.341-2.182,1.955c0,0.614,0.602,2.896,0.765,3.423   c0.075,0.241,0.519,0.722,1.003,1.354c0.572,0.747,1.21,1.625,1.517,1.616c0.539-0.012,0.635-0.547,1.617-1.016   c0.595-0.283,1.639-0.451,2.263-0.725c1.12-0.49,2.133-0.857,2.483-0.717c0.87,0.352,0.999,0.951,1.572,1.44   c0.572,0.49,0.864,0.452,1.304,1.016c0.438,0.564,0.292,1.814,0.09,2.342c-0.201,0.525-1.589,3.46-1.404,3.675   C28.739,26.383,29.269,26.435,29.192,26.822z";
+var start = "M391.575,492.137l-2.988-8.18L363.62,137.759c-0.01-0.156-0.035-0.325-0.068-0.486V84.766   c6.498-1.745,11.109-7.662,11.109-14.479c0-8.275-6.734-15.008-15.008-15.008s-15.002,6.733-15.002,15.008   c0,6.817,4.604,12.732,11.102,14.479l0.016,53.604l-16.484,104.756L316.631,83.725c-0.031-0.214-0.086-0.418-0.143-0.618v-53.62   c6.49-1.742,11.098-7.663,11.098-14.485c0-8.273-6.729-15.001-15.002-15.001c-8.275,0-15.008,6.728-15.008,15.001   c0,6.821,4.609,12.743,11.105,14.485V84.2c0,0.282,0.037,0.568,0.105,0.867l-10.246,126.129l-28.121-12.953   c-0.146-0.057-0.287-0.103-0.637-0.194l-0.345-0.063c-0.146-0.015-0.305-0.021-0.444-0.021l-1.033,0.142   c-0.157,0.046-0.304,0.094-0.281,0.099l-27.774,12.775l-8.67-126.841V29.486c6.497-1.736,11.103-7.657,11.103-14.485   C242.339,6.728,235.612,0,227.337,0c-8.274,0-15.009,6.728-15.009,15.001c0,6.821,4.605,12.743,11.105,14.485l0.015,54.388   l-22.645,159.245l-16.574-105.526c-0.017-0.146-0.042-0.286-0.075-0.428V84.761c6.498-1.745,11.107-7.667,11.107-14.483   c0-8.275-6.732-15.002-15.006-15.002c-8.275,0-15.003,6.728-15.003,15.002c0,6.817,4.604,12.737,11.103,14.483l0.006,54.619   l-24.866,344.571l-3.005,8.189c-0.15,0.435-0.224,0.879-0.224,1.325v42.715l0.026,0.355l1.344-0.041l0,0l-1.297,0.412   c0.03,0.147,0.067,0.294,0.173,0.597c0.053,0.172,0.124,0.319,0.203,0.471l0.168,0.297c0.136,0.216,0.224,0.299,0.209,0.271   l0.256,0.335c0.109,0.113,0.224,0.208,0.575,0.491c0.178,0.136,0.344,0.229,0.344,0.193l0.378,0.22   c0.219,0.088,0.454,0.155,0.674,0.204c0.263,0.067,0.538,0.099,0.854,0.099h89.707c2.154,0,3.904-1.751,3.884-4.202v-36.862   c0-4.208,3.424-7.633,7.633-7.633c4.207,0,7.626,3.425,7.626,7.633v37.16c0,2.149,1.75,3.9,3.899,3.9h10.256   c2.146,0,3.898-1.751,3.898-3.9v-37.16c0-4.208,3.424-7.633,7.633-7.633c3.334,0,6.303,2.208,7.285,5.384l0.346,39.436l0.082,0.747   c0.033,0.167,0.086,0.329,0.129,0.435l0.107,0.325l1.229-0.528l-1.004,0.968l0.271,0.392l1.535,1.211   c0.127,0.059,0.262,0.105,0.402,0.139l0.355,0.109c0.262,0.053,0.521,0.079,0.789,0.079h89.697c0.277,0,0.543-0.026,0.82-0.085   c0.258-0.058,0.508-0.137,0.898-0.319c0.174-0.087,0.346-0.183,0.68-0.438c0.137-0.101,0.262-0.227,0.141-0.144l0.299-0.252   l0.832-1.441l0.215-43.94C391.817,493.003,391.731,492.549,391.575,492.137z M297.534,219.333l-0.979,10.873l-23.678-11.538   v-10.715L297.534,219.333z M312.577,7.802c3.969,0,7.199,3.229,7.199,7.202s-3.23,7.209-7.199,7.209   c-3.971,0-7.207-3.236-7.207-7.209S308.606,7.802,312.577,7.802z M359.653,63.078c3.967,0,7.195,3.236,7.195,7.209   c0,3.973-3.229,7.202-7.195,7.202c-3.975,0-7.209-3.229-7.209-7.202C352.444,66.314,355.68,63.078,359.653,63.078z M335.34,269.419   c0.209,1.985,1.875,3.479,3.879,3.479c2.006,0,3.674-1.494,3.873-3.412l15.461-96.602l11.432,158.956   c-2.354-5.211-7.602-8.843-13.682-8.843c-8.271,0-15.006,6.725-15.006,15.001c0,6.812,4.609,12.733,11.107,14.49v53.704   l-26.959,48.813l-24.633-68.201l-0.6-68.1l13.773-197.852L335.34,269.419z M356.301,330.801c3.98,0,7.215,3.229,7.215,7.203   c0,3.973-3.234,7.207-7.215,7.207c-3.973,0-7.203-3.234-7.203-7.207C349.098,334.029,352.329,330.801,356.301,330.801z    M360.206,406.505v-54.017c5.133-1.381,9.09-5.368,10.523-10.35l8.326,115.82L360.206,406.505z M328.602,465.431l26.982-48.861   l28.428,77.59v38.122h-55.41V465.431L328.602,465.431z M277.43,322.092l15.086,9.096l0.299,33.481L277.43,322.092z    M262.627,322.092l-17.223,47.673l-0.073-37.249L262.627,322.092z M270.027,239.29c3.976,0,7.21,3.23,7.21,7.204   c0,3.973-3.234,7.202-7.21,7.202c-3.972,0-7.2-3.229-7.2-7.202C262.826,242.52,266.055,239.29,270.027,239.29z M292.405,318.596   l0.031,3.43l-18.512-11.159v-49.888c6.502-1.745,11.115-7.667,11.115-14.484c0-8.275-6.732-15.008-15.009-15.008   c-8.273,0-15.006,6.733-15.006,15.008c0,6.817,4.604,12.738,11.103,14.484v49.888l-20.853,12.575l-4.021-84.501l27.722-13.496   l27.923,13.611L292.405,318.596z M286.686,483.595c-8.51,0-15.436,6.923-15.436,15.427v33.261h-2.445v-33.261   c0-8.504-6.921-15.427-15.426-15.427c-8.518,0-15.442,6.923-15.442,15.427v33.261H219.26v-67.17l50.765-140.558l50.767,140.563   v67.163h-18.676v-33.26C302.118,490.516,295.198,483.595,286.686,483.595z M240.408,219.333l24.666-11.378v10.715l-23.69,11.538   L240.408,219.333z M180.237,63.078c3.974,0,7.21,3.236,7.21,7.209c0,3.973-3.236,7.202-7.21,7.202   c-3.972,0-7.202-3.229-7.202-7.202C173.034,66.314,176.265,63.078,180.237,63.078z M183.755,330.801   c3.974,0,7.203,3.229,7.203,7.203c0,3.973-3.229,7.207-7.203,7.207s-7.202-3.234-7.202-7.207   C176.553,334.029,179.782,330.801,183.755,330.801z M179.857,352.488v54.017l-18.855,51.461l8.327-115.831   C170.759,347.107,174.716,351.098,179.857,352.488z M187.656,352.488c6.496-1.745,11.102-7.67,11.102-14.49   c0-8.275-6.728-15.001-15.002-15.001c-6.078,0-11.332,3.632-13.685,8.844l11.43-158.962l15.458,96.534   c0.205,1.985,1.871,3.485,3.878,3.485c1.997,0,3.665-1.494,3.872-3.429l21.166-146.799l6.526,93.911   c-0.024,0.231-0.029,0.488-0.004,0.69l5.11,107.132l0.138,66.832l-23.031,63.771l-26.961-48.813V352.49h0.003V352.488z    M227.318,7.802c3.973,0,7.202,3.229,7.202,7.202s-3.229,7.209-7.202,7.209c-3.974,0-7.204-3.236-7.204-7.209   S223.345,7.802,227.318,7.802z M211.459,465.431v66.851h-55.414v-38.122l28.427-77.59L211.459,465.431z M269.494,199.36   L269.494,199.36L269.494,199.36L269.494,199.36z"
+var football = "M32,0C14.355,0,0,14.355,0,32s14.355,32,32,32c17.645,0,32-14.355,32-32S49.645,0,32,0z M61.624,36.731   l-3.885-6.439l2.681-7.88C61.439,25.425,62,28.647,62,32C62,33.61,61.869,35.189,61.624,36.731z M54.066,52.298   c-0.129-0.033-0.267-0.043-0.408-0.02L43.98,53.83c-0.021-0.118-0.057-0.236-0.123-0.345l-5.502-9.17l8.896-13.7h8.428   c0.023,0.108,0.047,0.215,0.105,0.312l5.236,8.678C59.761,44.41,57.335,48.748,54.066,52.298z M43.981,55.855l7.688-1.232   c-3.338,2.906-7.321,5.087-11.706,6.296L43.981,55.855z M12.65,9.1c5.056-4.279,11.541-6.913,18.628-7.082   c0.052,0.138,0.126,0.268,0.24,0.376l5.525,5.214l-2.185,8.156l-14.237,5.465c-0.052-0.042-0.093-0.094-0.154-0.126l-8.87-4.701   L12.65,9.1z M38.386,6.124l-4.283-4.042c3.916,0.273,7.628,1.293,10.989,2.931L38.386,6.124z M21.93,38.737l-0.816-15.554   L35.655,17.6l9.803,12.106l-8.483,13.063L21.93,38.737z M59.305,19.596c-0.031,0.054-0.072,0.098-0.093,0.159l-3.015,8.86h-9.048   L36.882,15.937l2.113-7.887l8.27-1.371c0.176-0.029,0.323-0.114,0.453-0.218C52.768,9.581,56.823,14.156,59.305,19.596z    M10.311,11.307l-0.802,5.561L4.16,20.843C5.595,17.274,7.696,14.045,10.311,11.307z M3.056,24.127   c0.044-0.023,0.09-0.037,0.131-0.068l7.737-5.751l8.158,4.323l0.888,16.936c0.002,0.025,0.013,0.048,0.016,0.073l-7.71,7.629   c-0.066,0.065-0.105,0.145-0.149,0.222L4.734,44.32c-0.028-0.012-0.057-0.009-0.085-0.018C2.953,40.545,2,36.383,2,32   C2,29.275,2.372,26.638,3.056,24.127z M6.078,47.072l5.415,2.322l4.141,7.729C11.72,54.564,8.44,51.119,6.078,47.072z    M18.837,58.951c-0.019-0.064-0.025-0.131-0.058-0.192l-5.317-9.924c0.076-0.043,0.155-0.08,0.22-0.145l8.027-7.942l14.507,3.888   l5.927,9.879c0.05,0.083,0.11,0.154,0.178,0.217l-5.449,6.867C35.285,61.859,33.659,62,32,62C27.28,62,22.814,60.901,18.837,58.951   z"
+var stadium = "M15.536,14.894l-4.43-4.43c1.243-0.929,3.011-0.841,4.142,0.288C16.377,11.883,16.465,13.65,15.536,14.894z M4.651,16.854L2.725,18.78l4.496,4.496l1.926-1.927L4.651,16.854z M21.349,9.147l1.926-1.926l-4.496-4.495l-1.926,1.926L21.349,9.147z M0.799,16.853l1.284,1.285l2.568-2.568l5.78,5.779l-2.568,2.569l1.284,1.283c1.064,1.064,2.788,1.064,3.853,0l5.778-5.778l-3.243-3.244c-1.604,1.28-3.94,1.197-5.425-0.289c-1.486-1.484-1.569-3.82-0.289-5.425L6.578,7.222L0.799,13C-0.266,14.064-0.266,15.788,0.799,16.853z M10.752,15.248c1.13,1.129,2.898,1.217,4.143,0.288l-4.431-4.43C9.535,12.351,9.623,14.118,10.752,15.248z M13,0.799l-5.778,5.78l3.242,3.242c1.604-1.279,3.94-1.196,5.426,0.289s1.568,3.821,0.289,5.426l3.243,3.243L25.201,13c1.064-1.064,1.064-2.788,0-3.853l-1.284-1.284l-2.568,2.568l-5.78-5.779l2.568-2.568l-1.284-1.285C15.788-0.266,14.064-0.266,13,0.799z"
+var map = AmCharts.makeChart("mapdiv",{
+type: "map",
+theme: "dark",
+projection: "mercator",
+panEventsEnabled : true,
+backgroundColor : "#535364",
+backgroundAlpha : 1,
+zoomControl: {
+zoomControlEnabled : true
+},
+dataProvider : {
+map : "worldHigh",
+images: [  {
+    id: "spain",
+    latitude: 1000,
+    longitude: 1000,
+    color: "#6c00ff",
+    label: "Spain",
+    labelFontSize: 28,
+    title: "Spain",
+    description:"Spain, a country on Europe’s Iberian Peninsula, includes 17 autonomous regions with diverse geography and cultures. Capital city Madrid is home to the Royal Palace and Prado museum, housing works by European masters. Segovia has a medieval castle (the Alcázar) and an intact Roman aqueduct. Catalonia’s capital, Barcelona, is defined by Antoni Gaudí’s whimsical modernist landmarks like the Sagrada Família church."
+  }, {
+    id: "sevilla",
+    latitude: 1000,
+    longitude: 1000,
+    svgPath: icon,
+    scale: 1,
+    color: "#6c00ff",
+    label: "Sevilla",
+    title: "Sevilla",
+    description:"Seville is the capital of southern Spain’s Andalusia region. It's famous for flamenco dancing, particularly in its Triana neighborhood. Major landmakrs include the ornate Alcázar castle complex, built during the Moorish Almohad dynasty, and the 18th-century Plaza de Toros de la Maestranza bullring. The Gothic Seville Cathedral is the site of Christopher Columbus’s tomb and a minaret turned bell tower, the Giraldo."
+   } , {
+    id: "madrid",
+    latitude: 1000,
+    longitude: 1000,
+    svgPath: icon,
+    scale: 1,
+    color: "#6c00ff",
+    label: "Madrid",
+    title: "Madrid",
+    description:"Madrid, Spain's central capital, is a city of elegant boulevards and expansive, manicured parks such as the Buen Retiro. It’s renowned for its rich repositories of European art, including the Prado Museum’s works by Goya, Velázquez and other Spanish masters. The heart of old Hapsburg Madrid is the portico-lined Plaza Mayor, and nearby is the baroque Royal Palace and Armory, displaying historic weaponry."
+  } , {
+    id: "barcelona",
+    latitude: 1000,
+    longitude: 1000,
+    svgPath: icon,
+    scale: 1,
+    color: "#6c00ff",
+    label: "Barcelona",
+    title: "Barcelona",
+    description:"Barcelona, the cosmopolitan capital of Spain’s Catalonia region, is known for its art and architecture. The fantastical Sagrada Família church and other modernist landmarks designed by Antoni Gaudí dot the city. Museu Picasso and Fundació Joan Miró feature modern art by their namesakes. City history museum MUHBA, includes several Roman archaeological sites."
+} , {
+    id: "bilbao",
+    latitude: 1000,
+    longitude: 1000,
+    svgPath: icon,
+    scale: 1,
+    color: "#6c00ff",
+    label: "Bilbao",
+    title: "Bilbao",
+    description:"Bilbao, an industrial port city in northern Spain, is surrounded by green mountains. It’s the de facto capital of Basque Country, with a skyscraper-filled downtown. It’s famed for the Frank Gehry–designed Guggenheim Museum Bilbao, which sparked revitalization when it opened in 1997. The museum houses prominent modern and contemporary works, but it’s the curvy, titanium-clad building that receives the most attention."
+} , {
+    id: "laspalmas",
+    latitude: 1000,
+    longitude: 1000,
+    svgPath: icon,
+    scale: 1,
+    color: "#6c00ff",
+    label: "Las Palmas",
+    title: "Las Palmas",
+    description:"Las Palmas is a capital of Gran Canaria, one of Spain's Canary Islands off northwestern Africa. A major cruise-ship port, the city is known for duty-free shopping and for its sandy beaches. At Playa de Las Canteras, a coral barrier lines the beach and shelters swimmers. The annual Las Palmas de Gran Canaria carnival brings together flamboyantly costumed performers, music and dancing." 
+} , {
+    id: "ibiza",
+    latitude: 1000,
+    longitude: 1000,
+    svgPath: icon,
+    scale: 1,
+    color: "#6c00ff",
+    label: "Ibiza",
+    title: "Ibiza",
+    description:"Ibiza is one of the Balearic islands, an archipelago of Spain in the Mediterranean Sea. It's well known for the lively nightlife in Ibiza Town and Sant Antoni, where major European nightclubs have summer outposts. It’s also home to quiet villages, yoga retreats and beaches, from Platja d'en Bossa, lined with hotels, bars and shops, to quieter sandy coves backed by pine-clad hills found all around the coast." 
+} , {
+    id: "sansebastian",
+    latitude: 1000,
+    longitude: 1000,
+    svgPath: icon,
+    scale: 1,
+    color: "#6c00ff",
+    label: "San Sebastian",
+    title: "San Sebastian",
+    description:"San Sebastián is a resort town on the Bay of Biscay in Spain’s mountainous Basque Country. It’s known for Playa de la Concha and Playa de Ondarreta, beaches framed by a picturesque bayfront promenade, and world-renowned restaurants helmed by innovative chefs. In its cobblestoned old town (Parte Vieja), upscale shops neighbor vibrant pintxo bars pairing local wines with bite-size regional specialties."
+} , {
+    id: "marbella",
+    latitude: 1000,
+    longitude: 1000,
+    svgPath: icon,
+    scale: 1,
+    color: "#6c00ff",
+    label: "Marbella",
+    title: "Marbella",
+    description:"Marbella is a city and resort area on southern Spain’s Costa del Sol, part of the Andalusia region. The Sierra Blanca Mountains are the backdrop to 27 km of sandy Mediterranean beaches, villas, hotels, and golf courses. West of Marbella town, the Golden Mile of prestigious nightclubs and coastal estates leads to Puerto Banús marina, filled with luxury yachts, and surrounded by upmarket boutiques and bars." 
+} , {
+    id: "malaga",
+    latitude: 1000,
+    longitude: 1000,
+    svgPath: icon,
+    scale: 1,
+    color: "#6c00ff",
+    label: "Malaga",
+    title: "Malaga",
+    description:"Málaga is a port city on southern Spain’s Costa del Sol, known for its high-rise hotels and resorts jutting up from yellow-sand beaches. Looming over that modern skyline are the city’s 2 massive hilltop citadels, the Alcazaba and ruined Gibralfaro, remnants of Moorish rule. The city's soaring Renaissance cathedral is nicknamed La Manquita (one-armed lady) because one of its towers was curiously left unbuilt."
+} , {
+    id: "benicassim",
+    latitude: 1000,
+    longitude: 1000,
+    svgPath: icon,
+    scale: 1,
+    color: "#6c00ff",
+    label: "Benicassim",
+    title: "Benicassim",
+    description:"Benicàssim is a municipality and beach resort located in the province of Castelló, on the Costa del Azahar in Spain. The Desert de les Palmes mountain range further inland shelters the town from the north wind."
+} , {
+    id: "valencia",
+    latitude: 1000,
+    longitude: 1000,
+    svgPath: icon,
+    scale: 1,
+    color: "#6c00ff",
+    label: "Valencia",
+    title: "Valencia",
+    description:"The port city of Valencia lies on Spain’s southeastern coast, where the Turia River meets the Mediterranean Sea. It’s known for its City of Arts and Sciences, with futuristic structures including a planetarium, an oceanarium and an interactive museum. Valencia also has several beaches, including some within nearby Albufera Park, a wetlands reserve with a lake and walking trails." 
+} , {
+    id: "ronda",
+    latitude: 1000,
+    longitude: 1000,
+    svgPath: icon,
+    scale: 1,
+    color: "#6c00ff",
+    label: "Ronda",
+    title: "Ronda",
+    description:"Ronda is a mountaintop city in Spain’s Malaga province in Andalusia that’s set dramatically above a deep gorge. This gorge (El Tajo) separates the city’s circa-15th-century new town from its old town, dating to Moorish rule. Puente Nuevo, a stone bridge spanning the gorge, has a lookout offering views. New town’s Plaza de Toros, a legendary 18th-century bullring, is one of the city’s most recognizable landmarks." 
+}, {
+    id: "flamenco",
+    latitude: 1000,
+    longitude: 1000,
+    svgPath: flamenco,
+    scale: 0.5,
+    color: "#D80027",
+    label: "",
+    title: "Flamenco"
+    }, {
+    id: "flamenco2",
+    latitude: 1000,
+    longitude: 1000,
+    svgPath: flamenco,
+    scale: 0.5,
+    color: "#D80027",
+    label: "",
+    title: "Flamenco"
+    }, {
+    id: "flamenco3",
+    latitude: 1000,
+    longitude: 1000,
+    svgPath: flamenco,
+    scale: 0.5,
+    color: "#D80027",
+    label: "",
+    title: "Flamenco"
+    } , {
+    id: "start",
+    latitude: 1000,
+    longitude: 1000,
+    svgPath: start,
+    scale: 0.1,
+    color: "#FFDA44",
+    label: "",
+    title: ""
+    } , {
+    id: "football",
+    latitude: 1000,
+    longitude: 1000,
+    svgPath: football,
+    scale: 0.5,
+    color: "#006DF0",
+    label: "",
+    title: "Football"
+    } , {
+    id: "stadium",
+    latitude: 1000,
+    longitude: 1000,
+    svgPath: stadium,
+    scale: 1,
+    color: "#006DF0",
+    label: "",
+    title: "Stadium"
+    }],
+getAreasFromMap : true,
+areas :
+[]
+},
+areasSettings : {
+autoZoom : true,
+color : "#B4B4B7",
+colorSolid : "#84ADE9",
+selectedColor : "#84ADE9",
+outlineColor : "#666666",
+rollOverColor : "#9EC2F7",
+rollOverOutlineColor : "#000000"
+}
+});
+var video = document.getElementById("video1");
+var spain = map.getObjectById("spain");
+var sevilla = map.getObjectById("sevilla");
+var madrid = map.getObjectById("madrid");
+var barcelona = map.getObjectById("barcelona");
+var bilbao = map.getObjectById("bilbao");
+var laspalmas = map.getObjectById("laspalmas");
+var ibiza = map.getObjectById("ibiza");
+var sansebastian = map.getObjectById("sansebastian");
+var marbella = map.getObjectById("marbella");
+var malaga = map.getObjectById("malaga");
+var benicassim = map.getObjectById("benicassim");
+var valencia = map.getObjectById("valencia");
+var ronda = map.getObjectById("ronda");
+var flamenco = map.getObjectById("flamenco");
+var flamenco2 = map.getObjectById("flamenco2");
+var flamenco3 = map.getObjectById("flamenco3");
+var start = map.getObjectById("start");
+var football = map.getObjectById("football");
+var stadium = map.getObjectById("stadium");
+map.addListener("clickMapObject", function (event) {
+ if (event.mapObject.id != undefined && (event.mapObject.id == "ES")) {
+   var vid = document.getElementById("video1");
+   vid.setAttribute("src", event.mapObject.id + ".mp4");
+   vid.style.visibility = "visible";    
+   vid.play();
+   restart();
+ }
+ else if(event.mapObject.id.length<3) {
+   var vid = document.getElementById("video1");
+   vid.pause();
+   vid.setAttribute("src", "");
+   vid.style.visibility = "hidden"; 
+   restart();
+ }
+});
+map.addListener("homeButtonClicked", function(event) {
+                video.pause();
+                video.style.visibility = "hidden"; 
+    restart();
+
+});
+
+var myFunc = function(){
+    var whereYouAt = video.currentTime;
+    if (document.getElementById("video1").getAttribute("src") == "ES.mp4"){
+    if (whereYouAt > 3 && whereYouAt < 5){
+   /*map.dataProvider.images = [
+       {id: "obj1", latitude: 40.4168, longitude:  -3.703790, type: "circle", color: "#6c00ff"} 
+   ];*/
+   /*map.dataProvider.zoomLevel = map.zoomLevel();
+   map.dataProvider.zoomLatitude = map.dataProvider.zoomLatitudeC = map.zoomLatitude();
+   map.dataProvider.zoomLongitude = map.dataProvider.zoomLongitudeC = map.zoomLongitude();
+   console.log(map.dataProvider);
+   map.validateData();*/
+           spain.longitude = -5.703790;
+           spain.latitude = 40.4168;
+           spain.validate();
+           start.longitude = -5.903790;
+           start.latitude = 40.4168;
+           start.validate();
+    }
+    else if (whereYouAt > 20 && whereYouAt < 21) {
+    flamenco.longitude = -5.994072;
+    flamenco.latitude = 38.392529;
+    flamenco.validate();
+    }
+    else if (whereYouAt > 21 && whereYouAt < 22) {
+    flamenco2.longitude = -4.994072;
+    flamenco2.latitude = 37.892529;
+    flamenco2.validate();
+    }
+    else if (whereYouAt > 22 && whereYouAt < 23) {
+    flamenco3.longitude = -3.994072;
+    flamenco3.latitude = 38.192529;
+    flamenco3.validate();
+    }
+    else if (whereYouAt > 30 && whereYouAt < 32) {
+    spain.longitude = 1000;
+    spain.latitude = 1000;
+    spain.validate();
+    }
+    else if (whereYouAt > 31 && whereYouAt < 33) {
+    sevilla.longitude = -5.994072;
+    sevilla.latitude = 37.392529;
+    sevilla.validate();
+    }
+    else if (whereYouAt > 58 && whereYouAt < 59) {
+    football.longitude = -4.994072;
+    football.latitude = 41.4168;
+    football.validate();
+    }
+    else if (whereYouAt >= 66 && whereYouAt <= 67) {
+    madrid.longitude = -3.70379;
+    madrid.latitude = 40.416775;
+    madrid.validate();
+    }
+    else if (whereYouAt >= 67 && whereYouAt <= 68) {
+    barcelona.longitude = 2.154007;
+    barcelona.latitude = 41.390205;
+    barcelona.validate();
+    }
+    else if (whereYouAt >= 70 && whereYouAt <= 71) {
+    stadium.longitude = -3.70379;
+    stadium.latitude = 39.816775;
+    stadium.validate();
+    }
+    else if (whereYouAt >= 80 && whereYouAt <= 81) {
+    bilbao.longitude = -2.935013;
+    bilbao.latitude = 43.262985;
+    bilbao.validate();
+    }
+    else if (whereYouAt >= 81 && whereYouAt <= 83) {
+    laspalmas.longitude = -15.436257;
+    laspalmas.latitude = 28.1235459;
+    laspalmas.validate();
+    }
+    else if (whereYouAt >= 87 && whereYouAt <= 90) {
+    ibiza.longitude = 1.42059829;
+    ibiza.latitude = 38.9067339;
+    ibiza.validate();
+    }
+    else if (whereYouAt >= 215 && whereYouAt <= 217) {
+    sansebastian.longitude = -1.993332;
+    sansebastian.latitude = 43.312691;
+    sansebastian.validate();
+    }
+    else if (whereYouAt >= 220 && whereYouAt <= 221) {
+    marbella.longitude = -4.8824;
+    marbella.latitude = 36.5101;
+    marbella.validate();
+    }
+    else if (whereYouAt >= 221 && whereYouAt <= 224) {
+    malaga.longitude = -4.4214;
+    malaga.latitude = 36.7213;
+    malaga.validate();
+    }
+    else if (whereYouAt >= 237 && whereYouAt <= 239) {
+    benicassim.longitude = 0.0642;
+    benicassim.latitude = 40.0554;
+    benicassim.validate();
+    }
+    else if (whereYouAt >= 274 && whereYouAt <= 276) {
+    valencia.longitude = -0.3763;
+    valencia.latitude = 39.4699;
+    valencia.validate();
+    }
+    else if (whereYouAt >= 303 && whereYouAt <= 305) {
+    ronda.longitude = -5.1612;
+    ronda.latitude = 36.7462;
+    ronda.validate();
+    }  
+}
+}
+
+var restart = function(){
+    spain.longitude = 1000;
+    spain.latitude = 1000;
+    spain.validate();
+    sevilla.longitude = 1000;
+    sevilla.latitude = 1000;
+    sevilla.validate();
+    madrid.longitude = 1000;
+    madrid.latitude = 1000;
+    madrid.validate();
+    barcelona.longitude = 1000;
+    barcelona.latitude = 1000;
+    barcelona.validate();
+    bilbao.longitude = 1000;
+    bilbao.latitude = 1000;
+    bilbao.validate();
+    laspalmas.longitude = 1000;
+    laspalmas.latitude = 1000;
+    laspalmas.validate();
+    ibiza.longitude = 1000;
+    ibiza.latitude = 1000;
+    ibiza.validate();
+    sansebastian.longitude = 1000;
+    sansebastian.latitude = 1000;
+    sansebastian.validate();
+    marbella.longitude = 1000;
+    marbella.latitude = 1000;
+    marbella.validate();
+    malaga.longitude = 1000;
+    malaga.latitude = 1000;
+    malaga.validate();
+    benicassim.longitude = 1000;
+    benicassim.latitude = 1000;
+    benicassim.validate();
+    valencia.longitude = 1000;
+    valencia.latitude = 1000;
+    valencia.validate();
+    ronda.longitude = 1000;
+    ronda.latitude = 1000;
+    ronda.validate();
+    flamenco.longitude = 1000;
+    flamenco.latitude = 1000;
+    flamenco.validate();
+    flamenco2.longitude = 1000;
+    flamenco2.latitude = 1000;
+    flamenco2.validate();
+    flamenco3.longitude = 1000;
+    flamenco3.latitude = 1000;
+    flamenco3.validate();
+    start.longitude = 1000;
+    start.latitude = 1000;
+    start.validate();
+    stadium.longitude = 1000;
+    stadium.latitude = 1000;
+    stadium.validate();
+    football.longitude = 1000;
+    football.latitude = 1000;
+    football.validate();
+}
+video.addEventListener('timeupdate',myFunc,false);
+</script>
